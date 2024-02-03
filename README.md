@@ -1,7 +1,7 @@
 # [PagerMon]([https://hrng.io/](https://github.com/pagermon/pagermon)https://github.com/pagermon/pagermon)
 ## Pagermon Utilities
 
-This utilities suite has been created with some simple maintenance in mind
+This utilities suite has been created with some simple maintenance in mind, and a follow-the-bouncing-ball to do a clean install of PagerMon (as there were some... irregularities when I did it in early 2024)
 
 Note that all data cleansing is as per decodes performed in Victoria, Australia, and your specific circumstances may vary! The owner & collaborators of this repository hold no responsibility for messages that have been deleted by using the scripts in this repository without reviewing and (where appropriate) updating requirements
 
@@ -83,3 +83,14 @@ Cleaup the Pagermon Log Files
    
     * A log of any outputs is set to generate to /home/pi/log/pm2_cron - be sure to create this location, update the output location, or delete **>/home/pi/log/pm2_cron/hourly_$(date +\%Y\%m\%d\%H\%M).log 2>&1** if you do not wish to generate an output
    
+
+## Clean Install notes
+In the pagermon_clean_install sub-folder of this repo is **install_steps.sh**
+
+These are the steps that I followed, noted as in the order I did them (or at least, in the order I **SHOULD** have done them!), to now be running my PagerMon instance without issue - so it may seem like there's some redunancy (like installing SQLite3, then forcing v5.0.0 6 steps later...), but this is all becuase I ran into issues at the NPM Install phase, and found these were the ways that I had to resolve the issues.
+One of the issues was regarding missing files during install, which - no matter what I tried - I couldn't get to run correctly. So in a moment of inspired madness, I copied over the node_modules folder I had backed up from the original instance I was using (which was the PagerMon Pi Image) and then it all worked...
+
+1. Follow the script step by step
+    * Don't forget that any line that ends with &&\ means that it's a "line-break" in the script, and whatever the following line is will need to be copied too
+2. Be sure to replace the node_modules folders before performing the npm install of either the Server or Client
+    * If you attempt the install without copying the files in this repo and the install fails, I suggest deleting all the node_modules folders before adding the version from this repo
