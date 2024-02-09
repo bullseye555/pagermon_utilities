@@ -69,11 +69,16 @@ Cleaup the Pagermon Log Files
 
 
 ### Instructions
+** **NOTE: GitHub changes the new-line end to CRLF from LF - Be sure to follow setp 2 to convert it back to UNIX** **
 1. Place the _pagermon_maintenance.sh_ file in a location of your choice. Existing location in the /home/pi/pagermon folder
 
     * If the location differs to that of /home/pi/pagermon update the location inside the sh file
   
-2. Create a Crontab job to schedule the cleanup job (the command is _crontab -e_)
+2. Conver the sh file back to UNIX new-line LF from CRLF by executing **dos2unix pagermon_maintenance.sh** 
+
+    * If the location differs to that of /home/pi/pagermon make sure to navigate to the correct folder
+	
+3. Create a Crontab job to schedule the cleanup job (the command is _crontab -e_)
    
     * You may use a different Scheduler if you want
    
