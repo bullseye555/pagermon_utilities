@@ -96,6 +96,7 @@ These are the steps that I followed, noted as in the order I did them (or at lea
 One of the issues was regarding missing files during install, which - no matter what I tried - I couldn't get to run correctly. So in a moment of inspired madness, I copied over the node_modules folder I had backed up from the original instance I was using (which was the PagerMon Pi Image) and then it all worked...
 
 1. Follow the script step by step
-    * Don't forget that any line that ends with &&\ means that it's a "line-break" in the script, and whatever the following line is will need to be copied too
-2. Be sure to replace the node_modules folders before performing the npm install of either the Server or Client
+    * While it is an SH file, it's not built to be run as a script. You should copy each step line by line (triple-clicking on the line then copy/paste should suffice in most cases)
+    	* Don't forget that any line that ends with **&&\\** means that it's a "line-break" in the script, and whatever the following line is will need to be copied too
+3. Be sure to replace the node_modules folders before performing the npm install of either the Server or Client
     * If you attempt the install without copying the files in this repo and the install fails, I suggest deleting all the node_modules folders before adding the version from this repo
