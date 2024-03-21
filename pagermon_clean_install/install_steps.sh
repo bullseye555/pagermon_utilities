@@ -48,6 +48,8 @@ cp -a ~/git/pagermon_themes/. ~/pagermon/server/themes/
 ##pagermon CLIENT install
 
 cd ~
+## The next two lines of commands are removing any existing SDR drivers, as there can be funky things happen if the wrong drivers are installed. 
+## If you know you need the drivers that are currently installed, skip these two command lines
 
 sudo apt purge ^librtlsdr
 
