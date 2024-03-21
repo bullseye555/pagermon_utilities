@@ -70,6 +70,7 @@ echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-
 cd ~
 
 git clone https://github.com/EliasOenal/multimon-ng
+cd multimon-ng
 mkdir build
 cd build
 cmake ..
@@ -78,7 +79,7 @@ sudo make install
 
 cd ~/pagermon/client
 
-#### Delete the node_modules folder and copy in the contents of node_modules_SERVER.tar.gz (after extracting from the archive)
+#### Delete the node_modules folder and copy in the contents of node_modules_CLIENT.tar.gz (after extracting from the archive)
 #### Be sure to update reader.sh, config/* and any other customisations now
 
 npm install -e NODE_OPTIONS='--max-old-space-size=2048'reader.sh
