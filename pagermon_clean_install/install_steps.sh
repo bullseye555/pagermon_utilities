@@ -141,3 +141,10 @@ pm2 start reader.sh
 pm2 save
 
 pm2 startup
+
+## Set PM2 to run at start up
+pm2 startup
+
+## Once this is run, it may give you a scrip that looks a bit like this that you need to run
+### sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u bullseye --hp /home/bullseye
+## Copy it, and then run it
