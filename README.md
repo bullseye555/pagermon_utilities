@@ -102,7 +102,7 @@ One of the issues was regarding missing files during install, which - no matter 
     * If you attempt the install without copying the files in this repo and the install fails, I suggest deleting all the node_modules folders before adding the version from this repo
 
 
-## Node Red notees
+## Node Red notes
 1. Add **package.json** to the node-red folder, which is ~/.node-red by default
 2. Install the follwing palettes
 
@@ -121,3 +121,4 @@ One of the issues was regarding missing files during install, which - no matter 
 	* node-red-node-pushover
 
 3. Import the **Pagermon NodeRed Flow.json**
+4. Review and modify nodes accordingly - you will need to configure gmail and discord connections
