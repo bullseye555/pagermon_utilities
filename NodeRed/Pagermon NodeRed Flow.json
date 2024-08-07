@@ -1,0 +1,1146 @@
+[
+    {
+        "id": "8048413c5f8e2721",
+        "type": "tab",
+        "label": "Pagermon Notifications Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4753722ef2d1cded",
+        "type": "http in",
+        "z": "8048413c5f8e2721",
+        "name": "Receive Page from PM2",
+        "url": "/pagermon",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "5244d05489f139e6",
+                "fb556a91c7cbf91e",
+                "2afb9354fd4a1367",
+                "8e7535fcda5be1b9"
+            ]
+        ],
+        "outputLabels": [
+            "200"
+        ]
+    },
+    {
+        "id": "5244d05489f139e6",
+        "type": "http response",
+        "z": "8048413c5f8e2721",
+        "name": "HTTP Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 150,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "d0d4fc28ec79189a",
+        "type": "switch",
+        "z": "8048413c5f8e2721",
+        "name": "Conditons Check - Message",
+        "property": "payload.0.message",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "###BRIGADE OF INTEREST###",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "###ADDRESSES OF INTEREST###",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "^(@@ALERT)\\s+\\w*\\s?\\w*\\s{1}([2-9]A)",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "###BRIGADE OF INTEREST###",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "###ADDRESSES OF INTEREST###",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "regex",
+                "v": "###ADDRESSES OF INTEREST###",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "###ADDRESSES OF INTEREST###",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 8,
+        "x": 1580,
+        "y": 220,
+        "wires": [
+            [
+                "52ad0d3e2193b04c"
+            ],
+            [
+                "d8f61e4727f1adfb"
+            ],
+            [
+                "d26baa3148d98b47",
+                "f3a7c09b57f4c874"
+            ],
+            [],
+            [
+                "a4a8f83645c76087"
+            ],
+            [],
+            [
+                "d26baa3148d98b47"
+            ],
+            [
+                "d26baa3148d98b47"
+            ]
+        ],
+        "outputLabels": [
+            "###BRIGADE OF INTEREST###",
+            "Address of Interest",
+            "nth Alarm",
+            "###BRIGADE OF INTEREST###",
+            "Address of Interest - Discord",
+            "Not Empty",
+            "###ADDRESSES OF INTEREST###",
+            "###BRIGADE OF INTEREST###"
+        ]
+    },
+    {
+        "id": "e57b3af4b32c1617",
+        "type": "template",
+        "z": "8048413c5f8e2721",
+        "name": "Set output body",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html><body><strong>Agency:</strong> {{ payload.0.agency }} <br>\n    <strong>Brigade/Unit:</strong> {{ payload.0.alias }} <br>\n    <strong>Message:</strong> {{ payload.0.message }} <br>\n    <strong>Time of Page decode:</strong> {{ payload.0.day }}/{{ payload.0.month }}/{{ payload.0.year }} {{ payload.0.hour }}:{{ payload.0.minute }}:{{ payload.0.secs }} <br>\n    </body>\n</html>",
+        "output": "str",
+        "x": 2580,
+        "y": 120,
+        "wires": [
+            [
+                "794c91a611657c96",
+                "bf849a286d4d1615"
+            ]
+        ]
+    },
+    {
+        "id": "1a4a0aaa580df7f3",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "Set DateTime to Payload.0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.0.year",
+                "pt": "msg",
+                "to": "year",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.0.month",
+                "pt": "msg",
+                "to": "month",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.0.day",
+                "pt": "msg",
+                "to": "day",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.0.hour",
+                "pt": "msg",
+                "to": "hours",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.0.minute",
+                "pt": "msg",
+                "to": "mins",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.0.secs",
+                "pt": "msg",
+                "to": "secs",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.0.msecs",
+                "pt": "msg",
+                "to": "msecs",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 260,
+        "wires": [
+            [
+                "b4414bdb64f436bd",
+                "c952464599e07880",
+                "d0d4fc28ec79189a",
+                "4815f5a78d3b80ce"
+            ]
+        ]
+    },
+    {
+        "id": "b31fcd4ab3ae70cc",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "Pager Alert - Bullseye Local",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Pager Alert - ###BRIGADE OF INTEREST###",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "https://github.com/bullseye555/pagermon_utilities/",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "gamelan",
+                "pt": "msg",
+                "to": "siren",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.0.topic",
+                "pt": "msg",
+                "to": "Pager Alert - ###BRIGADE OF INTEREST###",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "priority",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2220,
+        "y": 380,
+        "wires": [
+            [
+                "e57b3af4b32c1617",
+                "d13f70c2cb5defc0"
+            ]
+        ]
+    },
+    {
+        "id": "bf849a286d4d1615",
+        "type": "pushover",
+        "z": "8048413c5f8e2721",
+        "name": "Pushover API - Bullseye",
+        "device": "",
+        "title": "",
+        "priority": 0,
+        "sound": "siren",
+        "url": "",
+        "url_title": "",
+        "html": true,
+        "x": 2890,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "fb556a91c7cbf91e",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Received",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "1e51a388b82febd1",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Output DT",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "b4414bdb64f436bd",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Add DT to Payload",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1290,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "52ad0d3e2193b04c",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Conditions Check",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1850,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d13f70c2cb5defc0",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Switch",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2770,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d015c69489752f5f",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "convert DT",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "2afb9354fd4a1367",
+        "type": "function",
+        "z": "8048413c5f8e2721",
+        "name": "timeConvert",
+        "func": "if ( !msg.payload.timestamp ) msg.payload.timestamp = Math.round(+new Date());\n\nvar dt = new Date(msg.payload.timestamp * 1000);\n\nvar mm = dt.getMonth() + 1\n\nvar mth = '' + mm ;\nwhile (mth.length < 2) {\n\tmth = '0' + mth;\n    }\n\nvar dy = '' + dt.getDate() ;\nwhile (dy.length < 2) {\n\tdy = '0' + dy;\n}\n\nvar hr = '' + dt.getHours() ;\nwhile (hr.length < 2) {\n\thr = '0' + hr;\n}\n\nvar mn = '' + dt.getMinutes();\nwhile (mn.length < 2) {\n\tmn = '0' + mn;\n}\n\nvar sc = '' + dt.getSeconds();\nwhile (sc.length < 2) {\n\tsc = '0' + sc;\n}\n\nvar ms = '' + dt.getMilliseconds() ;\nwhile (ms.length < 2) {\n\tms = '0' + ms;\n}\n\nvar yr = '' + dt.getFullYear()\n\nvar msg = {\n\t'year':\t\tyr,\n\t'month':\tmth,\n\t'day':\t\tdy,\t\n\t'hours':\thr,\n\t'mins':\t\tmn,\n\t'secs':\t\tsc,\t\n\t'msecs':\tms\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "7cb37382ed2b6403",
+                "d015c69489752f5f"
+            ]
+        ]
+    },
+    {
+        "id": "8e7535fcda5be1b9",
+        "type": "join",
+        "z": "8048413c5f8e2721",
+        "name": "Join DateTime",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "_msgid",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 820,
+        "y": 260,
+        "wires": [
+            [
+                "1a4a0aaa580df7f3",
+                "b399cf7c9609f33e"
+            ]
+        ]
+    },
+    {
+        "id": "7cb37382ed2b6403",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.year",
+                "pt": "msg",
+                "to": "year",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.month",
+                "pt": "msg",
+                "to": "month",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.day",
+                "pt": "msg",
+                "to": "day",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.hour",
+                "pt": "msg",
+                "to": "hour",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.minute",
+                "pt": "msg",
+                "to": "mins",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.seconds",
+                "pt": "msg",
+                "to": "secs",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload.msec",
+                "pt": "msg",
+                "to": "msecs",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "8e7535fcda5be1b9",
+                "1e51a388b82febd1"
+            ]
+        ]
+    },
+    {
+        "id": "b399cf7c9609f33e",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Merge DT & PM2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "d8f61e4727f1adfb",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "Pager Alert - Address of Interest",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Pager Alert - Addresses of Interest",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.0.topic",
+                "pt": "msg",
+                "to": "Pager Alert - Addresses of Interest",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "https://github.com/bullseye555/pagermon_utilities/",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sound",
+                "pt": "msg",
+                "to": "siren",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "priority",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2230,
+        "y": 160,
+        "wires": [
+            [
+                "e57b3af4b32c1617"
+            ]
+        ]
+    },
+    {
+        "id": "71f78088deb7e85a",
+        "type": "template",
+        "z": "8048413c5f8e2721",
+        "name": "Set output body",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html><body><strong>Agency:</strong> {{ payload.0.agency }} <br>\n    <strong>Brigade/Unit:</strong> {{ payload.0.alias }} <br>\n    <strong>Message:</strong> {{ payload.0.message }} <br>\n    <strong>Time of Page decode:</strong> {{ payload.0.day }}/{{ payload.0.month }}/{{ payload.0.year }} {{ payload.0.hour }}:{{ payload.0.minute }}:{{ payload.0.secs }} <br>\n    </body>\n</html>",
+        "output": "str",
+        "x": 2580,
+        "y": 720,
+        "wires": [
+            [
+                "6d3c275de8f9e98b",
+                "280185ae84e22d8d"
+            ]
+        ]
+    },
+    {
+        "id": "d26baa3148d98b47",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "Pager Alert - NM",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Pager Alert",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2180,
+        "y": 720,
+        "wires": [
+            [
+                "71f78088deb7e85a"
+            ]
+        ]
+    },
+    {
+        "id": "6d3c275de8f9e98b",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Pushover notification - NM",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2840,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "c952464599e07880",
+        "type": "switch",
+        "z": "8048413c5f8e2721",
+        "name": "Conditons Check - Agency",
+        "property": "payload.0.agency",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1580,
+        "y": 620,
+        "wires": [
+            [
+                "3b872319e68d8b50"
+            ]
+        ]
+    },
+    {
+        "id": "794c91a611657c96",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Bullseye Output Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2830,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "67b64bfdd0306487",
+        "type": "e-mail",
+        "z": "8048413c5f8e2721",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "somepushoveremail@pushoverover.email",
+        "dname": "Pushover email - Bullseye ",
+        "x": 2890,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4b5c651263db369f",
+        "type": "discordMessageManager",
+        "z": "8048413c5f8e2721",
+        "name": "bullseyes_alerts",
+        "channel": "###CHANNELNUMBER###",
+        "token": "",
+        "x": 500,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "066f585989f1f631",
+        "type": "template",
+        "z": "8048413c5f8e2721",
+        "name": "Set output body",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html><body><strong>Agency:</strong> {{ payload.0.agency }} <br>\n    <strong>Brigade/Unit:</strong> {{ payload.0.alias }} <br>\n    <strong>Message:</strong> {{ payload.0.message }} <br>\n    <strong>Time of Page decode:</strong> {{ payload.0.day }}/{{ payload.0.month }}/{{ payload.0.year }} {{ payload.0.hour }}:{{ payload.0.minute }}:{{ payload.0.secs }} <br>\n    </body>\n</html>",
+        "output": "str",
+        "x": 2580,
+        "y": 620,
+        "wires": [
+            [
+                "9a983f4b14ab8682"
+            ]
+        ]
+    },
+    {
+        "id": "3b872319e68d8b50",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "Pager Alert - All decodes",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Pager Alert - All decodes",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.0.topic",
+                "pt": "msg",
+                "to": "Pager Alert - All decodes",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2210,
+        "y": 620,
+        "wires": [
+            [
+                "066f585989f1f631"
+            ]
+        ]
+    },
+    {
+        "id": "ad39e444e499c818",
+        "type": "template",
+        "z": "8048413c5f8e2721",
+        "name": "Set output body Discord",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": ".\n**Agency:** {{ payload.0.agency }}\n\n**Brigade/Unit:** {{ payload.0.alias }}\n**Message:** {{{ payload.0.message }}}\n**Time of Page decode:** {{ payload.0.day }}/{{ payload.0.month }}/{{ payload.0.year }} {{ payload.0.hour }}:{{ payload.0.minute }}:{{ payload.0.secs }}\n",
+        "output": "str",
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "79565728d071e0f5"
+            ]
+        ]
+    },
+    {
+        "id": "79565728d071e0f5",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "Discord AllOut Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "9a983f4b14ab8682",
+        "type": "debug",
+        "z": "8048413c5f8e2721",
+        "name": "AllOutDebug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2790,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "a0cb7319b43f5dd3",
+        "type": "template",
+        "z": "8048413c5f8e2721",
+        "name": "Set output body Discord",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": ".\n**ALERT TYPE:** *{{payload.0.topic}}*\n\n**Agency:** {{ payload.0.agency }}\n**Brigade/Unit:** {{ payload.0.alias }}\n\n**Message:** {{{ payload.0.message }}}\n\n**Time of Page decode:** {{ payload.0.day }}/{{ payload.0.month }}/{{ payload.0.year }} {{ payload.0.hour }}:{{ payload.0.minute }}:{{ payload.0.secs }}\n",
+        "output": "str",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "4b5c651263db369f"
+            ]
+        ]
+    },
+    {
+        "id": "4815f5a78d3b80ce",
+        "type": "switch",
+        "z": "8048413c5f8e2721",
+        "name": "Conditons Check - Brigade",
+        "property": "payload.0.alias",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "###BRIGADE OF INTEREST###",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "###BRIGADE OF INTEREST###",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "###BRIGADE OF INTEREST###",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 1580,
+        "y": 380,
+        "wires": [
+            [
+                "52ad0d3e2193b04c",
+                "c25e8c279738ca22"
+            ],
+            [
+                "b31fcd4ab3ae70cc"
+            ],
+            [
+                "0f1cacb873326586"
+            ]
+        ],
+        "outputLabels": [
+            "Bullseye Local Fire",
+            "Bullseye Local SES",
+            "Bullseye Local Brigade for Discord"
+        ]
+    },
+    {
+        "id": "c25e8c279738ca22",
+        "type": "switch",
+        "z": "8048413c5f8e2721",
+        "name": "Conditons Check - Message",
+        "property": "payload.0.message",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^(Hb|@@ALERT).+((?:STOP MESSAGE RECEIVED)|(?:INCIDENT STOP))|^@@ALERT.+(?:MOVE (UP|TO))|^@@ALERT",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1900,
+        "y": 360,
+        "wires": [
+            [
+                "b31fcd4ab3ae70cc"
+            ]
+        ],
+        "outputLabels": [
+            "W4 and D14"
+        ]
+    },
+    {
+        "id": "280185ae84e22d8d",
+        "type": "pushover",
+        "z": "8048413c5f8e2721",
+        "name": "Pushover API - NM",
+        "device": "",
+        "title": "",
+        "priority": 0,
+        "sound": "siren",
+        "url": "",
+        "url_title": "",
+        "html": true,
+        "x": 2870,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "f3a7c09b57f4c874",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "Pager Alert - Bullseye nth alarm",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Pager Alert - nth Alarm",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "https://github.com/bullseye555/pagermon_utilities/",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "sound",
+                "pt": "msg",
+                "to": "tugboat",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.0.topic",
+                "pt": "msg",
+                "to": "Pager Alert - nth Alarm",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "priority",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2230,
+        "y": 200,
+        "wires": [
+            [
+                "e57b3af4b32c1617"
+            ]
+        ]
+    },
+    {
+        "id": "0f157873e00d3033",
+        "type": "template",
+        "z": "8048413c5f8e2721",
+        "name": "Set output body Discord",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": ".\n**ALERT TYPE:** *{{payload.0.topic}}*\n\n**Agency:** {{ payload.0.agency }}\n**Brigade/Unit:** {{ payload.0.alias }}\n\n**Message:** {{{ payload.0.message }}}\n\n**Time of Page decode:** {{ payload.0.day }}/{{ payload.0.month }}/{{ payload.0.year }} {{ payload.0.hour }}:{{ payload.0.minute }}:{{ payload.0.secs }}\n",
+        "output": "str",
+        "x": 2610,
+        "y": 440,
+        "wires": [
+            [
+                "05d5af674da048a3"
+            ]
+        ]
+    },
+    {
+        "id": "05d5af674da048a3",
+        "type": "discordMessageManager",
+        "z": "8048413c5f8e2721",
+        "name": "family_discord_alert",
+        "channel": "###CHANNELNUMBER###",
+        "token": "",
+        "x": 2900,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0f1cacb873326586",
+        "type": "switch",
+        "z": "8048413c5f8e2721",
+        "name": "Conditons Check - Message",
+        "property": "payload.0.message",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^@@ALERT",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1900,
+        "y": 440,
+        "wires": [
+            [
+                "62d88e30bbb3090b"
+            ]
+        ],
+        "outputLabels": [
+            "W4 and D14"
+        ]
+    },
+    {
+        "id": "62d88e30bbb3090b",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "Pager Alert - Bullseye Local (Discord)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Pager Alert - ###BRIGADE OF INTEREST###",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.0.topic",
+                "pt": "msg",
+                "to": "Pager Alert - ###BRIGADE OF INTEREST###",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2250,
+        "y": 440,
+        "wires": [
+            [
+                "0f157873e00d3033"
+            ]
+        ]
+    },
+    {
+        "id": "a4a8f83645c76087",
+        "type": "change",
+        "z": "8048413c5f8e2721",
+        "name": "Pager Alert - AoI (Discord)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Pager Alert - Address of Interest",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.0.topic",
+                "pt": "msg",
+                "to": "Pager Alert - Address of Interest",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2210,
+        "y": 260,
+        "wires": [
+            [
+                "0f157873e00d3033"
+            ]
+        ]
+    }
+]
