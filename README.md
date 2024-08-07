@@ -102,16 +102,22 @@ One of the issues was regarding missing files during install, which - no matter 
     * If you attempt the install without copying the files in this repo and the install fails, I suggest deleting all the node_modules folders before adding the version from this repo
 
 
-##Node Red notees
+## Node Red notees
 1. Add **package.json** to the node-red folder, which is ~/.node-red by default
 2. Install the follwing palettes
 
-	*@node-red-contrib-themes/theme-collection
-    *node-red-contrib-discord-advanced
-    *node-red-contrib-google-oauth2
-    *node-red-contrib-moment
-    *node-red-dashboard
-    *node-red-node-email
-    *node-red-node-pushover
+	* @node-red-contrib-themes/theme-collection
+    
+	* node-red-contrib-discord-advanced
+    
+	* node-red-contrib-google-oauth2
+    
+	* node-red-contrib-moment
+    
+	* node-red-dashboard
+    
+	* node-red-node-email
+    
+	* node-red-node-pushover
 
 3. Import the **Pagermon NodeRed Flow.json**
