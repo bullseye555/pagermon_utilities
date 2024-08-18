@@ -63,6 +63,6 @@ find /home/pi/pagermon/server/logs -name "*.log" -type f -mtime +90 -delete
 pm2 start all
 
 # Clear the Hourly/Daily/Maintenance cron logs older than 30 days
-find /home/pi/log/pm2_log -name "*.log" -type f -mtime +30 -delete
+find /home/pi/log/pm2_cron -name "*.log" -type f -mtime +30 -delete
 # Clear the PM2 logs older than 90 days
 find /home/pi/log/pm2_log -name "*.log" -type f -mtime +90 -delete
