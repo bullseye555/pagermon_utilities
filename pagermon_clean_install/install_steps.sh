@@ -27,6 +27,14 @@ sudo npm install -g node-pre-gyp
 sudo npm install sqlite3@5.0.0
 
 #### Whilst in /pagermon/server directory delete the node_modules folder if present and copy in the contents of node_modules_SERVER.tar.gz (after extracting from the archive)
+rm -r node_modules
+#### This copies the file from GitHub, and then renames and extracts it
+wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_SERVER.tar.gz
+mv node_modules_SERVER.tar.gz node_modules.tar.gz
+tar -xvzf node_modules.tar.gz
+#### now we delete the zip file
+rm node_modules.tar.gz
+
 #### Be sure to update any other customisations now
 
 #### Next we'll need to create and edit our Process.json file.
@@ -104,6 +112,14 @@ sudo make install
 cd ~/pagermon/client
 
 #### Whilst in /pagermon/client directory Delete the node_modules folder if present and copy in the contents of node_modules_CLIENT.tar.gz (after extracting from the archive)
+rm -r node_modules
+#### This copies the file from GitHub, and then renames and extracts it
+wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_CLIENT.tar.gz
+mv node_modules_CLIENT.tar.gz node_modules.tar.gz
+tar -xvzf node_modules.tar.gz
+#### now we delete the zip file
+rm node_modules.tar.gz
+
 #### Be sure to update reader.sh, config/* and any other customisations now
 
 ## Start Pagermon Server [Web Host]
