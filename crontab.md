@@ -44,4 +44,5 @@ Crontab entries have multiple fields - a handy guide on Crontabs is available at
 1. In the Terminal, type `crontab -e` and, if needed select the editor you want to use
 2. Navigate to the bottom of the file, past the last row that starts with a **#** (this is Crontab's _comment_ symbol) and enter/paste in the command for the job
    * In this example, the _Daily Decode **delete**_ is being used, with no logging
+   * ![image](https://github.com/user-attachments/assets/47cf6a83-ea60-4e1c-b58b-3e41d123834c)
 3. Save and exit the file, and the job has now been created
