@@ -18,19 +18,17 @@ Clean up junk decode data
 * See the _hourly_decode_cleanup.sql_ file for the query
 
 ### Instructions
-1. Place the _hourly_decode_cleanup.sql_ file in a location of your choice. Existing location in the /home/pi/pagermon/server folder
+1. Place the _hourly_decode_cleanup.sql_ file in a location of your choice. Location of the database file is in _/home/pi/pagermon/server _for this guide
 
-    * If the location differs to that of /home/pi/pagermon/server update the location inside the SQL file
+    * If the location differs to that of _/home/pi/pagermon/server_, be sure to update the location inside the SQL file
 
-2. Create a Crontab job to schedule the cleanup job (the command is _crontab -e_)
+2. Create a Crontab job to schedule the cleanup job (see the crontab file for more details)
 
     * You may use a different Scheduler if you want
+    
+    * Make sure you update the location accordingly if your _hourly_decode_cleanup.sql_ file is not in _/home/pi/pagermon/server_
   
-    * If using Crontab, you can copy the Crontab template in the _contab_entries.txt_ file
-  
-    * Make sure you update the location accordingly if your _hourly_decode_cleanup.sql_ file is not in /home/pi/pagermon/server
-  
-    * A log of any outputs is set to generate to /home/pi/log/pm2_cron - be sure to create this location, update the output location, or delete **>/home/pi/log/pm2_cron/hourly_$(date +\%Y\%m\%d\%H\%M).log 2>&1** if you do not wish to generate an output
+    * A log of any outputs is set to generate to /home/pi/log/pm2_cron - be sure to create this location, update the output location, or delete **>/home/pi/log/pm2_cron/hourly_$(date +\%Y\%m\%d\%H\%M).log 2>&1** if you do not wish to generate an log output
   
 
 ## Data Archiving / Deletion
@@ -38,20 +36,27 @@ Clean up junk decode data
 2. Delete older decodes from the main database without migrating to an archive file
    
 Archiving to another database file assumes some knowledge, and that the secondary database has been setup
+> [!NOTE]
+> 1. The Archiving Job has two date ranges in it. 
+>    * The first is _>30_ - this will archive and delete from **messages.db** any message that is _**older than**_ 30 days from the date the job is run
+>    * The second is _>730_ - this will delete from the **archive** database any message that is _**older than**_ 730 days from the date the job is run
+
+> [!IMPORTANT]
+> 1. The Delete Job has one date range in it. 
+>    * The first is _>30_ - this will delete from **messages.db** any message that is _**older than**_ 30 days from the date the job is run
+
 
 ### Instructions
-1. Choose between the _Archive_ and _Delete_ SQL files and place the file in a location of your choice. Existing location in the /home/pi/pagermon/server folder
+1. Choose between the _Archive_ and _Delete_ SQL files and place the file in a location of your choice. Location of the database file is in _/home/pi/pagermon/server _for this guide
 
-    * If the location differs to that of /home/pi/pagermon/server update the location inside the SQL file
+    * If the location differs to that of _/home/pi/pagermon/server_, be sure to update the location inside the SQL file
   
     * If using the _Archive_ file, update the destination location and name where appropriate
   
-2. Create a Crontab job to schedule the cleanup job (the command is _crontab -e_)
+2. Create a Crontab job to schedule the cleanup job (see the crontab file for more details)
    
     * You may use a different Scheduler if you want
-  
-    * If using Crontab, you can copy the Crontab template in the _contab_entries.txt_ file
-  
+   
     * Make sure you update the location accordingly if your _old_decodes.sql_ file is not in /home/pi/pagermon/server
   
     * A log of any outputs is set to generate to /home/pi/log/pm2_cron - be sure to create this location, update the output location, or delete **>/home/pi/log/pm2_cron/daily_$(date +\%Y\%m\%d\%H\%M).log 2>&1** if you do not wish to generate an output
@@ -65,7 +70,7 @@ Cleaup the Pagermon Log Files
   * Weekly archive of pagermon.log
   * Delete any _.log_ files in /home/pi/pagermon/server/logs that are older than 30 days
 
-** **This job will stop stop Pagermon when it is running, to ensure Logs are being altered during processing** **
+** **This job will stop stop Pagermon when it is running, to ensure Logs aren't being altered during processing** **
 
 
 ### Instructions
@@ -78,12 +83,10 @@ Cleaup the Pagermon Log Files
 
     * If the location differs to that of /home/pi/pagermon make sure to navigate to the correct folder
 	
-3. Create a Crontab job to schedule the cleanup job (the command is _crontab -e_)
+3. Create a Crontab job to schedule the cleanup job (see the crontab file for more details)
    
     * You may use a different Scheduler if you want
-   
-    * If using Crontab, you can copy the Crontab template in the _contab_entries.txt_ file
- 
+    
     * Make sure you update the location accordingly if your _pagermon_maintenance.sh_ file is not in /home/pi/pagermon/server
    
     * A log of any outputs is set to generate to /home/pi/log/pm2_cron - be sure to create this location, update the output location, or delete **>/home/pi/log/pm2_cron/hourly_$(date +\%Y\%m\%d\%H\%M).log 2>&1** if you do not wish to generate an output
