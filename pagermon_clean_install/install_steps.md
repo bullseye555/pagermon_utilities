@@ -43,13 +43,13 @@ sudo npm install sqlite3@5.0.0
 `rm -r node_modules`
 
 9. Copy the Node Modules files from the utilities repo
-   * Copy the file from GitHub, and then rename and extract
+  * Copy the file from GitHub, and then rename and extract
 ```
 wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_SERVER.tar.gz
 mv node_modules_SERVER.tar.gz node_modules.tar.gz
 tar -xvzf node_modules.tar.gz
 ```
-   * Delete the zip file
+  * Delete the zip file
    
 `rm node_modules.tar.gz`
 
@@ -170,13 +170,13 @@ cd ~/pagermon/client
 rm -r node_modules
 ```
 5. Copy the Node Modules files from the utilities repo
-   * Copy the file from GitHub, and then rename and extract
+  * Copy the file from GitHub, and then rename and extract
 ```
 wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_CLIENT.tar.gz
 mv node_modules_CLIENT.tar.gz node_modules.tar.gz
 tar -xvzf node_modules.tar.gz
 ```
-   * Delete the zip file
+  * Delete the zip file
    
 `rm node_modules.tar.gz`
 
