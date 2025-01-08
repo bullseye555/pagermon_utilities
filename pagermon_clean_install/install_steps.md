@@ -227,7 +227,7 @@ cp config/default.json config/config.json
    * If you haven't already, update your reader.sh file accordingly and save 
 3. Install the Client NPM dependencies
 
-`npm install -e NODE_OPTIONS='--max-old-space-size=2048'reader.sh`
+`npm install -e NODE_OPTIONS='--max-old-space-size=2048'`
 
 > [!CAUTION] 
 > This NPM Audit Fix (step 4) is _**OPTIONAL**_. If you do a clean install and find dependency errors, repeat this clean-install process but do NOT complete this step
