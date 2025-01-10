@@ -1,10 +1,12 @@
 # [PagerMon]([https://hrng.io/](https://github.com/pagermon/pagermon)https://github.com/pagermon/pagermon)
 ## PagerMon SERVER install 
 
-### NOTE: This guide assumes all instrucations from install_steps has been taken, and you are adding in a seconday instace
-### There are two options below 
-### 1. Is for a full second installation with both the Web Server and Reader being duplicated
-### 2. Is for an additional *reader* that feeds to an existing Web Server
+> [!NOTE]
+> This guide assumes all instrucations from install_steps has been taken, and you are adding in a seconday instace
+>
+> There are two options below 
+> 1. Is for a full second installation with both the Web Server and Reader being duplicated
+> 2. Is for an additional *reader* that feeds to an existing Web Server
 
 ## Installing Server
 This assumes that the existing installation of PagerMon is in the `/pagermon` folder of the user (eg: `~/pagermon` ) and the new instance will be in `~/pagermon2`
@@ -28,23 +30,23 @@ Be sure to enter `y` for any alerts about removing write-protected files
 > [!NOTE] 
 > If you are doing a re-install and have any other customisations for the Server, now is the time to add them
 4. Create and edit the Process.json file.
-   * Create a copy of the default file
+- Create a copy of the default file
    
 `cp $HOME/pagermon2/server/process-default.json $HOME/pagermon2/server/process.json`
 
-* Open the file using your favourite editor - for the purposes of this guide we will use nano.
+- Open the file using your favourite editor - for the purposes of this guide we will use nano
    
 `nano $HOME/pagermon/server/process.json`
 
-	* Edit line 2 to match your environment. (In this case, we're naming is pagermon2, but it can be anything distinctive you choose)
+- Edit line 2 to match your environment. (In this case, we're naming is pagermon2, but it can be anything distinctive you choose)
    
 `"name"             : "pagermon2",`
 
-   * Edit line 3 to match your environment.
+- Edit line 3 to match your environment.
    
 `"cwd"              : "/home/$USER/pagermon2/server",`
 
-   * Edit Line 22 to your domain name (if desired)
+- Edit Line 22 to your domain name (if desired)
    
 `"HOSTNAME": "pagermon2home.local",`
 
@@ -53,11 +55,11 @@ Be sure to enter `y` for any alerts about removing write-protected files
 >
 > `"HOSTNAME": "",`
 
-	* Edit line 24 - we also need to add a comma as we're putting a new line in
+- Edit line 24 - we also need to add a comma as we're putting a new line in
 
 `"APP_NAME": "pagermon2",`
 
-	* At the end of line 24, hit **enter** to create a new line, and add the following. The Port Number entered here is the port number that the second PagerMon instance will be available from once it's started
+- At the end of line 24, hit **enter** to create a new line, and add the following. The Port Number entered here is the port number that the second PagerMon instance will be available from once it's started
 	
 `"PORT": 3001`
 
