@@ -93,17 +93,23 @@ Cleaup the Pagermon Log Files
    
 
 ## Clean Install notes
+### Clean Install for a single instance
 In the pagermon_clean_install sub-folder of this repo is **install_steps.sh**
 
 These are the steps that I followed, noted as in the order I did them (or at least, in the order I **SHOULD** have done them!), to now be running my PagerMon instance without issue - so it may seem like there's some redunancy (like installing SQLite3, then forcing v5.0.0 6 steps later...), but this is all becuase I ran into issues at the NPM Install phase, and found these were the ways that I had to resolve the issues.
 One of the issues was regarding missing files during install, which - no matter what I tried - I couldn't get to run correctly. So in a moment of inspired madness, I copied over the node_modules folder I had backed up from the original instance I was using (which was the PagerMon Pi Image) and then it all worked...
 
 1. Follow the script step by step
-    * While it is an SH file, it's not built to be run as a script. You should copy each step line by line (triple-clicking on the line then copy/paste should suffice in most cases)
-    	* Don't forget that any line that ends with **&&\\** means that it's a "line-break" in the script, and whatever the following line is will need to be copied too
+    * Don't forget that any line that ends with **&&\\** means that it's a "line-break" in the script, and whatever the following line is will need to be copied too
 3. Be sure to replace the node_modules folders before performing the npm install of either the Server or Client
     * If you attempt the install without copying the files in this repo and the install fails, I suggest deleting all the node_modules folders before adding the version from this repo
 
+### Clean Install for multiple instances on the same device
+While I'm not currently running multiple instances on the same device (I have in the past), I have put this guide together for those that wish to do it (I've had a couple of requests about it!)
+
+There are a couple of different options
+1. Running two (or more) instances of the Server (Web UI) and Client (message decoder), so that one instance is available on Port 3000 and the second is available on a different port (EG: 3001)
+2. Running two (or more) instances of the Client, and feed both onto the same Server (Web UI)
 
 ## Node Red notes
 1. Add **package.json** to the node-red folder, which is ~/.node-red by default
