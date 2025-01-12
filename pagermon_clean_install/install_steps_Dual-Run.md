@@ -11,22 +11,10 @@
 ## Installing Pagermon 
 This assumes that the existing installation of PagerMon is in the `/pagermon` folder of the user (eg: `~/pagermon` ) and the new instance will be in `~/pagermon2`
 
-1. Create a temp PagerMon folder and navigate into it
+1. Clone PagerMon from Git into `~\pagermon2`
 ```
-mkdir ~/pagermontmp
-cd ~/pagermontmp
+git clone https://github.com/pagermon/pagermon.git ~/pagermon2
 ```
-2. Clone PagerMon from Git
-
-`git clone https://github.com/pagermon/pagermon.git`
-
-3. Move the new PagerMon folder into the correct directory, rename it, and delete the temp folder
-```
-cp -r pagermon ~/pagermon2
-cd ~
-rm -r pagermontmp
-```
-Be sure to enter `y` for any alerts about removing write-protected files
 
 > [!TIP]
 > From here: 
