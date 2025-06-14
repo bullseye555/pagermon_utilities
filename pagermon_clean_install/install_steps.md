@@ -3,10 +3,10 @@
 
 1. Update the installed applications
 ```
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt update
-sudo apt upgrade
+sudo apt-get update &&\
+sudo apt-get upgrade &&\
+sudo apt update &&\
+sudo apt upgrade 
 ```
 2. Install NVM
 
@@ -23,7 +23,7 @@ sudo apt-get install -y nodejs
 
 5. Using NPM, install the latest NPM and PM2
 ```
-sudo npm install npm@latest -g
+sudo npm install npm@latest -g &&\
 sudo npm install pm2@latest -g
 ```
 6. Clone PagerMon from Git
@@ -32,8 +32,8 @@ sudo npm install pm2@latest -g
 
 7. Navigate to the Pagermon Server folder, and install node-pre-gyp and SQLite3 v5.0.0
 ```
-cd ~/pagermon/server
-sudo npm install -g node-pre-gyp
+cd ~/pagermon/server &&\
+sudo npm install -g node-pre-gyp &&\
 sudo npm install sqlite3@5.0.0
 ```
 > [!CAUTION] 
@@ -45,8 +45,8 @@ sudo npm install sqlite3@5.0.0
 9. Copy the Node Modules files from the utilities repo
   * Copy the file from GitHub, and then rename and extract
 ```
-wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_SERVER.tar.gz
-mv node_modules_SERVER.tar.gz node_modules.tar.gz
+wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_SERVER.tar.gz &&\
+mv node_modules_SERVER.tar.gz node_modules.tar.gz &&\
 tar -xvzf node_modules.tar.gz
 ```
   * Delete the zip file
@@ -103,7 +103,7 @@ tar -xvzf node_modules.tar.gz
 ## Pagermon THEMES install
 1. Create the git folder from the home directory and navigate to it
 ```
-mkdir ~/git
+mkdir ~/git &&\
 cd ~/git/
 ```
 2. Clone the repo
@@ -131,34 +131,34 @@ cd ~/git/
 > If there has been a clean environment (eg, a fresh install of Linux), then there will be no drivers and this step can be ignored
 1. Remove old drivers
 ```
-sudo apt purge ^librtlsdr
+sudo apt purge ^librtlsdr &&\
 sudo rm -rvf /usr/lib/librtlsdr* /usr/include/rtl-sdr* /usr/local/lib/librtlsdr* /usr/local/include/rtl-sdr* /usr/local/include/rtl_* /usr/local/bin/rtl_*
 ```
 2. Install drivers
 ```
-sudo apt-get install libusb-1.0-0-dev git cmake pkg-config build-essential
+sudo apt-get install libusb-1.0-0-dev git cmake pkg-config build-essential &&\
 
-git clone https://github.com/rtlsdrblog/rtl-sdr-blog
+git clone https://github.com/rtlsdrblog/rtl-sdr-blog &&\
 
-cd rtl-sdr-blog/
-mkdir build
-cd build
-cmake ../ -DINSTALL_UDEV_RULES=ON
-make
-sudo make install
-sudo cp ../rtl-sdr.rules /etc/udev/rules.d/
-sudo ldconfig
-echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
+cd rtl-sdr-blog/ &&\
+mkdir build &&\
+cd build &&\
+cmake ../ -DINSTALL_UDEV_RULES=ON &&\
+make &&\
+sudo make install &&\
+sudo cp ../rtl-sdr.rules /etc/udev/rules.d/ &&\
+sudo ldconfig &&\
+echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf &&\
 ```
 3. Install Multimon
 ```
-cd ~
-git clone https://github.com/EliasOenal/multimon-ng
-cd multimon-ng
-mkdir build
-cd build
-cmake ..
-make
+cd ~ &&\
+git clone https://github.com/EliasOenal/multimon-ng &&\
+cd multimon-ng &&\
+mkdir build &&\
+cd build &&\
+cmake .. &&\
+make &&\
 sudo make install
 ```
 
@@ -166,14 +166,14 @@ sudo make install
 > Steps 4 and 5 are _optional_
 4. Navigate to /pagermon/client directory delete the node_modules folder if present and copy in the contents of node_modules_SERVER.tar.gz (after extracting from the archive)
 ```
-cd ~/pagermon/client
+cd ~/pagermon/client &&\
 rm -r node_modules
 ```
 5. Copy the Node Modules files from the utilities repo
   * Copy the file from GitHub, and then rename and extract
 ```
-wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_CLIENT.tar.gz
-mv node_modules_CLIENT.tar.gz node_modules.tar.gz
+wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_CLIENT.tar.gz &&\
+mv node_modules_CLIENT.tar.gz node_modules.tar.gz &&\
 tar -xvzf node_modules.tar.gz
 ```
   * Delete the zip file
@@ -218,7 +218,7 @@ tar -xvzf node_modules.tar.gz
 Before running Pagermon Client you have to configure it to send the decoded info to the pagermon server.
 1. Copy default.json to config.json
 ```
-cd ~/pagermon/client/
+cd ~/pagermon/client/ &&\
 cp config/default.json config/config.json 
 ```
 2. Edit config.json with your favorite editor.
