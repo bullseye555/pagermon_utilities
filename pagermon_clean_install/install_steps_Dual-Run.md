@@ -70,15 +70,15 @@ git clone https://github.com/pagermon/pagermon.git ~/pagermon2
 2. Navigate to /pagermon2/server directory and delete the node_modules folder if present and copy in the contents of node_modules_SERVER.tar.gz (after extracting from the archive)
 
 ```
-cd /pagermon2/server
+cd /pagermon2/server &&\
 rm -r node_modules
 ```
 
 3. Copy the Node Modules files from the utilities repo
   * Copy the file from GitHub, and then rename and extract
 ```
-wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_SERVER.tar.gz
-mv node_modules_SERVER.tar.gz node_modules.tar.gz
+wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_SERVER.tar.gz &&\
+mv node_modules_SERVER.tar.gz node_modules.tar.gz &&\
 tar -xvzf node_modules.tar.gz
 ```
   * Delete the zip file
@@ -97,8 +97,8 @@ tar -xvzf node_modules.tar.gz
    * Save the file by using the hotkey CTRL-O, close the file by pressing CTRL-X.
 5. Perform the Install of the NPM & ddependencies
 ```
-sudo npm install -g node-pre-gyp
-sudo npm install sqlite3@5.0.0
+sudo npm install -g node-pre-gyp &&\
+sudo npm install sqlite3@5.0.0 &&\
 sudo npm install -e NODE_OPTIONS='--max-old-space-size=2048'
 ```
 
@@ -126,7 +126,7 @@ sudo npm install -e NODE_OPTIONS='--max-old-space-size=2048'
 > If you have already added the themes to the existing Server, skip straight to step 3
 1. Create the git folder from the home directory and navigate to it
 ```
-mkdir ~/git
+mkdir ~/git &&\
 cd ~/git/
 ```
 2. Clone the repo
@@ -163,14 +163,14 @@ cd ~/git/
 > Steps 3 and 4 are _optional_
 3. Navigate to /pagermon2/client directory delete the node_modules folder if present and copy in the contents of node_modules_SERVER.tar.gz (after extracting from the archive)
 ```
-cd ~/pagermon2/client
+cd ~/pagermon2/client &&\
 rm -r node_modules
 ```
 4. Copy the Node Modules files from the utilities repo
   * Copy the file from GitHub, and then rename and extract
 ```
-wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_CLIENT.tar.gz
-mv node_modules_CLIENT.tar.gz node_modules.tar.gz
+wget https://github.com/bullseye555/pagermon_utilities/raw/refs/heads/main/pagermon_clean_install/node_modules_CLIENT.tar.gz &&\
+mv node_modules_CLIENT.tar.gz node_modules.tar.gz &&\
 tar -xvzf node_modules.tar.gz
 ```
   * Delete the zip file
@@ -215,7 +215,7 @@ tar -xvzf node_modules.tar.gz
 Before running Pagermon Client you have to configure it to send the decoded info to the pagermon server.
 1. Copy default.json to config.json
 ```
-cd ~/pagermon2/client/
+cd ~/pagermon2/client/ &&\
 cp config/default.json config/config.json 
 ```
 2. Edit config.json with your favorite editor.
