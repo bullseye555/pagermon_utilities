@@ -1,13 +1,17 @@
-This will require a 16GB (or larger) SD card for you Pi<br>
+This will require a 16GB (or larger) SD card for your Pi<br>
+Due to the size, I can't upload it to here - so it's available for download from Google Drive (no sign in required) <a href="https://drive.google.com/file/d/1yDjg3cqsgejdHsxnBmh1tppfhZG45xUU/view?usp=sharing"> here</a><br>
+Algorithm : SHA256<br>
+Hash      : 055E19EAE87787BE950625FCD47C637CFCAF168A9AD728D17DB630C93239CBFE<br>
+<br>
 <br><b>Defaults:</b><br>
 Raspberry Pi Username: Pi<br>
 Raspberry Pi Password: raspberry<br>
 PagerMon Server Username: admin<br>
 PagerMon Server Password: changeme<br>
 My PagerMon Themes from <a href="https://github.com/bullseye555/pagermon_themes"> here </a> have been installed, but the default PagerMon theme has been left as the enabled theme<br>
-PM2 has <b>NOT</b> been configured to auto-start on boot, once you've update reader.sh file (if required), follow the below steps<br>
+PM2 has <b>NOT</b> been configured to auto-start on boot<br>
 <br>
-PagerMon Client will need to be configured for your specific locaation - this is in the `/pagermon/client/reader.sh` file
+PagerMon Client will need to be configured for your specific locaation - this is in the `/pagermon/client/reader.sh` file<br>
 The current configuration works for my location in Victoria, Australia<br>
 <br>
 
